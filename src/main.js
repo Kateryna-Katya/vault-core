@@ -1,71 +1,152 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Инициализация иконок и анимации
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-    if (typeof AOS !== 'undefined') AOS.init({ duration: 1000, once: true });
+/**
+ * VAULT-CORE.BLOG - CORE ENGINE 2026
+ */
 
-    // 2. Мобильное меню
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 1. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ---
+    let correctCaptchaAnswer = 0;
+    const header = document.querySelector('.header');
     const burger = document.getElementById('burgerBtn');
     const mobileMenu = document.getElementById('mobileMenu');
-    const closeBtn = document.querySelector('.close-menu');
+    const closeMenu = document.querySelector('.close-menu');
     const mobileLinks = document.querySelectorAll('.mobile-nav a');
+    const mainForm = document.getElementById('mainForm');
+    const phoneInput = document.getElementById('phoneInput');
+    const cookiePopup = document.getElementById('cookiePopup');
+    const acceptCookies = document.getElementById('acceptCookies');
 
-    if (burger && mobileMenu) {
-        const toggleMenu = () => mobileMenu.classList.toggle('active');
-        burger.addEventListener('click', toggleMenu);
-        if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
-        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
-    }
+    // --- 2. ИНИЦИАЛИЗАЦИЯ ВНЕШНИХ БИБЛИОТЕК ---
+    const initLibraries = () => {
+        if (window.lucide) lucide.createIcons();
+        if (window.AOS) {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+        }
+    };
 
-    // 3. Математическая капча (Исправлено)
-    const captchaText = document.getElementById('captchaText'); // ПРОВЕРЬТЕ ЭТОТ ID В HTML
-    const n1 = Math.floor(Math.random() * 10) + 1;
-    const n2 = Math.floor(Math.random() * 5) + 1;
-    const correctSum = n1 + n2;
+    // --- 3. ЛОГИКА КАПЧИ ---
+    const generateCaptcha = () => {
+        const captchaQuestion = document.getElementById('captchaQuestion');
+        if (!captchaQuestion) return;
 
-    if (captchaText) {
-        captchaText.innerText = `Сколько будет ${n1} + ${n2}?`;
-    }
+        const num1 = Math.floor(Math.random() * 10) + 2;
+        const num2 = Math.floor(Math.random() * 8) + 1;
+        correctCaptchaAnswer = num1 + num2;
 
-    // 4. Валидация телефона
-    const phone = document.getElementById('phoneInput');
-    if (phone) {
-        phone.addEventListener('input', (e) => {
+        captchaQuestion.innerText = `Подтвердите: ${num1} + ${num2} = ?`;
+        
+        const captchaInput = document.getElementById('captchaAnswer');
+        if (captchaInput) captchaInput.value = ''; // Очистка при обновлении
+    };
+
+    // --- 4. МОБИЛЬНОЕ МЕНЮ (БУРГЕР) ---
+    const toggleMobileMenu = () => {
+        if (mobileMenu && burger) {
+            mobileMenu.classList.toggle('active');
+            burger.classList.toggle('open');
+            // Блокировка скролла при открытом меню
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+    };
+
+    if (burger) burger.addEventListener('click', toggleMobileMenu);
+    if (closeMenu) closeMenu.addEventListener('click', toggleMobileMenu);
+    
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            burger.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // --- 5. ВАЛИДАЦИЯ ТЕЛЕФОНА (ТОЛЬКО ЦИФРЫ) ---
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/\D/g, '');
         });
     }
 
-    // 5. Обработка формы
-    const form = document.getElementById('mainForm');
-    const status = document.getElementById('formStatus');
-
-    if (form) {
-        form.addEventListener('submit', (e) => {
+    // --- 6. ОБРАБОТКА ФОРМЫ (AJAX IMITATION) ---
+    if (mainForm) {
+        mainForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            
             const captchaInput = document.getElementById('captchaAnswer');
-            const userAnswer = captchaInput ? parseInt(captchaInput.value) : null;
+            const statusBox = document.getElementById('formStatus');
+            const userValue = captchaInput ? parseInt(captchaInput.value) : null;
 
-            if (userAnswer !== correctSum) {
-                alert('Неверный ответ на защитный вопрос!');
+            if (userValue !== correctCaptchaAnswer) {
+                alert('Неверный результат капчи. Попробуйте еще раз.');
+                generateCaptcha();
                 return;
             }
 
-            if (status) {
-                status.style.display = 'block';
-                status.innerHTML = '<span style="color: #166534">Отправка...</span>';
-            }
+            // Имитация отправки
+            const submitBtn = mainForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Отправка...';
 
             setTimeout(() => {
-                if (status) status.innerHTML = '<span style="color: #166534">Успешно! Мы свяжемся с вами.</span>';
-                form.reset();
-            }, 2000);
+                if (statusBox) {
+                    statusBox.style.display = 'block';
+                    statusBox.className = 'form-status success';
+                    statusBox.innerHTML = '<strong>Готово!</strong> Мы получили ваш запрос и свяжемся с вами в течение 15 минут.';
+                }
+                
+                mainForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
+                generateCaptcha(); // Обновляем для безопасности
+            }, 1800);
         });
     }
 
-    // 6. Хедер при скролле
-    const header = document.querySelector('.header');
-    if (header) {
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
+    // --- 7. КОНТРОЛЬ СКРОЛЛА (HEADER) ---
+    const handleScroll = () => {
+        if (!header) return;
+        if (window.scrollY > 60) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    };
+
+    // --- 8. COOKIE POPUP ---
+    const checkCookies = () => {
+        if (!cookiePopup) return;
+        const isAccepted = localStorage.getItem('vault_cookies_accepted');
+        
+        if (!isAccepted) {
+            setTimeout(() => {
+                cookiePopup.classList.add('active');
+            }, 3000);
+        }
+    };
+
+    if (acceptCookies) {
+        acceptCookies.addEventListener('click', () => {
+            localStorage.setItem('vault_cookies_accepted', 'true');
+            cookiePopup.classList.remove('active');
         });
     }
+
+    // --- 9. ЗАПУСК ВСЕХ ФУНКЦИЙ ---
+    initLibraries();
+    generateCaptcha();
+    checkCookies();
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Проверка при загрузке
 });
+
+/**
+ * Исправление для Spline-viewer (Howler Error)
+ * Предотвращает падение скрипта, если Spline ищет HowlerGlobal
+ */
+window.HowlerGlobal = window.HowlerGlobal || {};
