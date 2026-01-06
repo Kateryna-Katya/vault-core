@@ -1,56 +1,230 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vault-core/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vault-Core | IT-школа будущего</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.28/build/spline-viewer.js"></script>
     <script type="module" crossorigin src="/vault-core/index.js"></script>
-    <link rel="stylesheet" crossorigin href="/vault-core/assets/styles-guStct1H.css">
+    <link rel="stylesheet" crossorigin href="/vault-core/assets/styles-DmEFpIbW.css">
   </head>
   <body>
-    <header class="header">
-  <div class="container">
-    <nav class="nav">
-      <a class="nav-logo" href="./index.html" aria-label="Site logo">
-        <svg class="nav-logo-icon" width="100" height="30">
-          <use href="{=$icon-path}"></use>
-        </svg>
-      </a>
-      <ul class="nav-list">
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-act}" href="./page-2.html">Page 2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-curr}" href="./page-3.html">Page 3</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="mobile-overlay" id="mobileMenu">
+  <button class="close-menu">&times;</button>
+  <nav class="mobile-nav">
+    <a href="#home">Главная</a>
+    <a href="#about">О платформе</a>
+    <a href="#features">Преимущества</a>
+    <a href="#innovations">Инновации</a>
+    <a href="#blog">Блог</a>
+    <a href="#contact" class="m-btn">Начать сейчас</a>
+  </nav>
+</div>
+
+<header class="header">
+  <div class="container nav-container">
+    <a href="/" class="logo"><span class="logo-dot"></span>Vault-Core</a>
+    <ul class="nav-menu">
+      <li><a href="#home">Главная</a></li>
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#features">Плюсы</a></li>
+      <li><a href="#innovations">Технологии</a></li>
+      <li><a href="#blog">Блог</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#contact" class="btn-primary">Запросить доступ</a>
+      <button class="burger" id="burgerBtn"><span></span><span></span></button>
+    </div>
   </div>
 </header>
 
-
-    <main>
+    <main id="main-content">
       <!-- Loads the specified .html file -->
-      
+      <section class="hero" id="home">
+    <div class="hero-3d">
+        <spline-viewer url="https://prod.spline.design/6Wq1Q7YEB96pSIs8/scene.splinecode"></spline-viewer>
+    </div>
+    <div class="container">
+        <div class="hero-content" data-aos="fade-up">
+            <span class="badge">Платформа года в Европе</span>
+            <h1>Технологии, которые <br><span class="text-gradient">работают на вас</span></h1>
+            <p>Постройте карьеру, которая меняет правила игры. Оцените перспективы проекта с AI-инструментами для
+                реальных задач.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn-primary">Пройти регистрацию</a>
+                <a href="#about" class="btn-secondary">Узнать детали</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="wave-top"><svg viewBox="0 0 1440 320">
+            <path fill="#f8fafc"
+                d="M0,128L80,144C160,160,320,192,480,186.7C640,181,800,139,960,128C1120,117,1280,139,1360,149.3L1440,160L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
+            </path>
+        </svg></div>
+    <div class="container">
+        <div class="section-grid">
+            <div class="section-img" data-aos="zoom-in">
+                <img src="img/placeholder.png" alt="Platform">
+                <div class="floating-card">
+                    <i data-lucide="zap"></i>
+                    <span>Легко разобраться без опыта</span>
+                </div>
+            </div>
+            <div class="section-text" data-aos="fade-left">
+                <h2>Переосмыслите подход <br>к развитию</h2>
+                <p>Vault-Core — это инновационная технология обучения, где пошаговый путь понятен каждому. Мы внедрили
+                    передовую цифровую инфраструктуру, чтобы ваш старт был быстрым и легким.</p>
+                <ul class="check-list">
+                    <li><i data-lucide="check-circle"></i> Экспертная поддержка на всех этапах</li>
+                    <li><i data-lucide="check-circle"></i> Методологии, доказавшие эффективность</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="text-center">Ваши преимущества</h2>
+        </div>
+        <div class="features-grid">
+            <div class="f-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="f-icon"><i data-lucide="trending-up"></i></div>
+                <h3>Стратегия роста</h3>
+                <p>Практики, применимые уже сегодня для масштабирования ваших навыков.</p>
+            </div>
+            <div class="f-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="f-icon"><i data-lucide="shield-check"></i></div>
+                <h3>Проверенный партнер</h3>
+                <p>Предложение активно только в странах ЕС с гарантией качества.</p>
+            </div>
+            <div class="f-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="f-icon"><i data-lucide="pie-chart"></i></div>
+                <h3>Пассивный доход</h3>
+                <p>Технология, позволяющая создать фундамент для финансовой свободы.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact-sec" id="contact">
+    <div class="container">
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h2>Готовы начать?</h2>
+                <p>Получите бесплатную консультацию по всем вопросам уже сегодня.</p>
+                <div class="c-item">
+                    <i data-lucide="mail"></i>
+                    <span>team@vault-core.blog</span>
+                </div>
+            </div>
+            <form class="contact-form" id="mainForm">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phoneInput" placeholder="Телефон (только цифры)" required>
+                </div>
+                <div class="captcha-row">
+                    <label id="captchaQuestion">5 + 2 = ?</label>
+                    <input type="number" id="captchaAnswer" placeholder="Ответ" required>
+                </div>
+                <label class="checkbox-container">
+                    <input type="checkbox" required>
+                    <span class="checkmark"></span>
+                    Я согласен с политикой конфиденциальности
+                </label>
+                <button type="submit" class="btn-primary w-100">Отправить запрос</button>
+                <div id="formStatus" class="form-status"></div>
+            </form>
+        </div>
+    </div>
+</section>
     </main>
 
     <footer class="footer">
+  <div class="wave-separator">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+        class="shape-fill"></path>
+    </svg>
+  </div>
   <div class="container">
-    <p class="footer-desc">
-      Made with ✨ by
-      <a
-        class="footer-link"
-        href="https://goit.global/ua/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GoIT team
-      </a>
-    </p>
+    <div class="footer-grid">
+      <div class="footer-col branding">
+        <a href="/" class="logo">Vault-Core</a>
+        <p class="footer-desc">Передовая цифровая инфраструктура для вашего обучения. Технологии, которые меняют правила
+          игры.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Главная</a></li>
+          <li><a href="#courses">Программы</a></li>
+          <li><a href="#features">Преимущества</a></li>
+          <li><a href="#blog">Блог</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Документы</h4>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="return.html">Return Policy</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+          <li><a href="personal-data-policy.html">Data Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <ul class="footer-contacts">
+          <li>
+            <i data-lucide="phone" class="icon-sm"></i>
+            <a href="tel:+4930209560">+49 30 209560</a>
+          </li>
+          <li>
+            <i data-lucide="mail" class="icon-sm"></i>
+            <a href="mailto:hello@vault-core.blog">hello@vault-core.blog</a>
+          </li>
+          <li>
+            <i data-lucide="map-pin" class="icon-sm"></i>
+            <span>Friedrichstraße 101, 10117 Berlin, Germany</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Vault-Core. Платформа года в Европе.</p>
+    </div>
   </div>
 </footer>
-
+<div id="cookiePopup" class="cookie-popup">
+  <p>Этот сайт использует cookies для улучшения работы. Подробнее — в нашей <a href="./cookies.html">Cookie политике</a>.
+  </p>
+  <button id="acceptCookies" class="btn-primary">Принять</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
   </body>
 </html>
