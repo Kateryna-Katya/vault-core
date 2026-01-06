@@ -601,3 +601,134 @@ a {
         padding: 40px;
     }
 }
+/* --- Глобальные отступы для секций --- */
+section {
+    padding: 120px 0;
+    /* Увеличиваем отступы, чтобы секции не слипались */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Исключение для Hero, так как там min-height */
+.hero {
+    padding: 160px 0 100px 0;
+}
+
+/* --- Улучшенный Хедер --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 25px 0;
+    transition: var(--transition);
+    background: transparent;
+}
+
+/* Состояние при скролле (добавляется через JS) */
+.header.scrolled {
+    padding: 15px 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 255, 209, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-link {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* --- Исправление разделителей --- */
+.wavy-divider-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    transform: translateY(-95%);
+    /* Прижимаем к предыдущей секции без щелей */
+    z-index: 1;
+}
+
+.wavy-divider-top svg {
+    width: 100%;
+    height: 80px;
+}
+
+/* Добавляем фон для секций, чтобы визуально их разделить */
+.about {
+    background: var(--light);
+}
+
+.features {
+    background: var(--white);
+}
+
+.innovations {
+    background: var(--dark);
+    margin: 40px 24px;
+    /* Делаем секцию в виде "острова" */
+    border-radius: 60px;
+    padding: 100px 0;
+}
+
+.blog {
+    background: var(--white);
+}
+
+.contact {
+    background: var(--light);
+}
+
+/* --- Стили для кнопок в хедере --- */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-primary {
+    padding: 12px 28px;
+    border-radius: 50px;
+    background: var(--dark);
+    color: var(--white);
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background: var(--primary);
+    color: var(--dark);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0, 255, 209, 0.3);
+}
